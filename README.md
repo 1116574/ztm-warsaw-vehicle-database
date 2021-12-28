@@ -26,3 +26,6 @@ Produces following output:
 ```
 
 Note: Run this at your own risk of getting throttled by cloudflare or other bot stoping service.
+
+### License
+Please email or message me if you want to use it in commercial settings. You can use it privately for small non-profit projects provided you link and credit this repository and autohor(s). Pull requests and issues are welcome.
