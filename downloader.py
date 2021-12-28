@@ -28,7 +28,7 @@ for a in v_list:
 
     v['year'] = details[0].find_all('div', class_='vehicle-details-entry')[2].find_all('div')[1].get_text()
     # print(details[1].find_all('div', class_='vehicle-details-entry'))
-    v['traciton_type'] = details[1].find_all('div', class_='vehicle-details-entry')[0].find_all('div')[1].get_text()
+    v['traciton_type_raw'] = details[1].find_all('div', class_='vehicle-details-entry')[0].find_all('div')[1].get_text()
     v['license_plate'] = details[1].find_all('div', class_='vehicle-details-entry')[1].find_all('div')[1].get_text()
     v['ticket_machine'] = details[3].find_all('div', class_='vehicle-details-entry')[0].find_all('div')[1].get_text()
     v['features_raw'] = details[3].find_all('div', class_='vehicle-details-entry')[1].find_all('div')[1].get_text()
@@ -38,6 +38,16 @@ for a in v_list:
         v['ticket_machine'] = False
     elif 'dostępny' in v['ticket_machine']:
         v['ticket_machine'] = True
+
+    # traction type parsing
+    if 'Kolej miejska' in v['traciton_type_raw']:
+        v['traciton_type'] = 'rail'
+    elif 'Autobus' in v['traciton_type_raw']:
+        v['traciton_type'] = 'bus'
+    elif 'Metro' in v['traciton_type_raw']:
+        v['traciton_type'] = 'metro'
+    elif 'Tramwaj' in v['traciton_type_raw']:
+        v['traciton_type'] = 'tram'
 
     # try parsing featureset
     fset = v['features_raw'].split(', ')
